@@ -143,14 +143,14 @@ function newsFeed() {
   }
 
   newsList.push("</ul>");
-  newsList.push("\n    <div>\n      <a href=\"#/page/".concat(store.currentPage - 1, "\">\uC774\uC804 \uD398\uC774\uC9C0</a>\n      <a href=\"#/page/").concat(store.currentPage + 1, "\">\uB2E4\uC74C \uD398\uC774\uC9C0</a>\n    </div>\n  "));
+  newsList.push("\n    <div>\n      <a href=\"#/page/".concat(store.currentPage > 1 ? store.currentPage - 1 : 1, "\">\uC774\uC804 \uD398\uC774\uC9C0</a>\n      <a href=\"#/page/").concat(store.currentPage + 1, "\">\uB2E4\uC74C \uD398\uC774\uC9C0</a>\n    </div>\n  "));
   container.innerHTML = newsList.join("");
 }
 
 function newsDetail() {
-  var id = location.hash.substring("1");
+  var id = location.hash.substring(7);
   var newsContent = getData(CONTENT_URL.replace("@id", id));
-  container.innerHTML = "\n    <h1>".concat(newsContent.title, "</h1>\n    <div>\n      <a href=\"#\">\uBAA9\uB85D\uC73C\uB85C</a>\n    </div>\n  ");
+  container.innerHTML = "\n    <h1>".concat(newsContent.title, "</h1>\n    <div>\n      <a href=\"#/page/").concat(store.currentPage, "\">\uBAA9\uB85D\uC73C\uB85C</a>\n    </div>\n  ");
 }
 
 function router() {

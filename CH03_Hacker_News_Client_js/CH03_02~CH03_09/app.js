@@ -33,7 +33,9 @@ function newsFeed() {
   newsList.push("</ul>");
   newsList.push(`
     <div>
-      <a href="#/page/${store.currentPage - 1}">이전 페이지</a>
+      <a href="#/page/${
+        store.currentPage > 1 ? store.currentPage - 1 : 1
+      }">이전 페이지</a>
       <a href="#/page/${store.currentPage + 1}">다음 페이지</a>
     </div>
   `);
@@ -42,14 +44,14 @@ function newsFeed() {
 }
 
 function newsDetail() {
-  const id = location.hash.substring("1");
+  const id = location.hash.substring(7);
 
   const newsContent = getData(CONTENT_URL.replace("@id", id));
 
   container.innerHTML = `
     <h1>${newsContent.title}</h1>
     <div>
-      <a href="#">목록으로</a>
+      <a href="#/page/${store.currentPage}">목록으로</a>
     </div>
   `;
 }
