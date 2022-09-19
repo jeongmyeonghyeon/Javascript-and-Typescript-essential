@@ -60,6 +60,8 @@ document.getElementById("root").appendChild(ul);
   });
   ```
 
+---
+
 ##### 04. 문자열을 활용한 HTML 다루기
 
 ```
