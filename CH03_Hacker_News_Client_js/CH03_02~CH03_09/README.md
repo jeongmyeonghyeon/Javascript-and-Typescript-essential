@@ -29,6 +29,8 @@ for (let i = 0; i < 10; i++) {
 document.getElementById("root").appendChild(ul);
 ```
 
+---
+
 ##### 03. 두 개의 화면을 가진 웹앱
 
 ```
