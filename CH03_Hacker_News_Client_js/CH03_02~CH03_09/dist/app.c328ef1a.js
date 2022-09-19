@@ -139,7 +139,7 @@ function newsFeed() {
   var newsFeed = getData(NEWS_URL);
   store.limit = Math.ceil(newsFeed.length / store.offset);
   var newsList = [];
-  var template = "\n    <div>\n      <h1>Hacker News</h1>\n      <ul>\n        {{__news_feed__}}\n      </ul>\n      <div>\n        <a href=\"#/page/{{__prev_page__}}\">\uC774\uC804 \uD398\uC774\uC9C0</a>\n        <a href=\"#/page/{{__next_page__}}\">\uB2E4\uC74C \uD398\uC774\uC9C0</a>\n      </div>\n    </div>\n  ";
+  var template = "\n    <div class=\"container mx-auto p-4\">\n      <h1>Hacker News</h1>\n      <ul>\n        {{__news_feed__}}\n      </ul>\n      <div>\n        <a href=\"#/page/{{__prev_page__}}\">\uC774\uC804 \uD398\uC774\uC9C0</a>\n        <a href=\"#/page/{{__next_page__}}\">\uB2E4\uC74C \uD398\uC774\uC9C0</a>\n      </div>\n    </div>\n  ";
 
   for (var i = (store.currentPage - 1) * store.offset; i < store.currentPage * store.offset; i++) {
     newsList.push("\n      <li>\n        <a href=\"#/show/".concat(newsFeed[i].id, "\">\n          ").concat(newsFeed[i].title, " (").concat(newsFeed[i].comments_count, ")\n        </a>\n      </li>\n    "));
@@ -202,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54664" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56657" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

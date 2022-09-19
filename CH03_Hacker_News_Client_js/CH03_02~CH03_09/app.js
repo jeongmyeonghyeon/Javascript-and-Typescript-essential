@@ -21,7 +21,7 @@ function newsFeed() {
   store.limit = Math.ceil(newsFeed.length / store.offset);
   const newsList = [];
   let template = `
-    <div>
+    <div class="container mx-auto p-4">
       <h1>Hacker News</h1>
       <ul>
         {{__news_feed__}}
