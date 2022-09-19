@@ -5,6 +5,8 @@ const NEWS_URL = "https://api.hnpwa.com/v0/news/1.json";
 const CONTENT_URL = "https://api.hnpwa.com/v0/item/@id.json";
 const store = {
   currentPage: 1,
+  offset: 10,
+  limit: null,
 };
 
 function getData(url) {
@@ -16,11 +18,16 @@ function getData(url) {
 
 function newsFeed() {
   const newsFeed = getData(NEWS_URL);
+  store.limit = Math.ceil(newsFeed.length / store.offset);
   const newsList = [];
 
   newsList.push("<ul>");
 
-  for (let i = (store.currentPage - 1) * 10; i < store.currentPage * 10; i++) {
+  for (
+    let i = (store.currentPage - 1) * store.offset;
+    i < store.currentPage * store.offset;
+    i++
+  ) {
     newsList.push(`
       <li>
         <a href="#/show/${newsFeed[i].id}">
@@ -36,7 +43,9 @@ function newsFeed() {
       <a href="#/page/${
         store.currentPage > 1 ? store.currentPage - 1 : 1
       }">이전 페이지</a>
-      <a href="#/page/${store.currentPage + 1}">다음 페이지</a>
+      <a href="#/page/${
+        store.currentPage < store.limit ? store.currentPage + 1 : store.limit
+      }">다음 페이지</a>
     </div>
   `);
 
