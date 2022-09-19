@@ -1,5 +1,7 @@
 ##### Chapter 03. Hacker News Client
 
+---
+
 ##### 02. 12줄의 코드로 시작하기.
 
 ```
