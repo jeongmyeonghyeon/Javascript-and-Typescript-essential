@@ -95,3 +95,13 @@ document.getElementById("root").appendChild(ul);
 ```
 
 ---
+
+##### 07. 복잡한 UI 구현을 위한 준비 작업 - 템플릿
+
+```
+1. 템플릿 렌더링
+2. tailwind css
+3. 스타일링 맛보기
+```
+
+---
