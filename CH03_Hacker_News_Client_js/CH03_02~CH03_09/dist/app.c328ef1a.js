@@ -127,7 +127,10 @@ var ul = document.createElement("ul");
 
 for (var i = 0; i < 10; i++) {
   var li = document.createElement("li");
-  li.innerHTML = newsFeed[i].title;
+  var a = document.createElement("a");
+  a.href = "#";
+  a.innerHTML = "".concat(newsFeed[i].title, " (").concat(newsFeed[i].comments_count, ")");
+  li.appendChild(a);
   ul.appendChild(li);
 }
 
@@ -160,7 +163,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53454" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50471" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

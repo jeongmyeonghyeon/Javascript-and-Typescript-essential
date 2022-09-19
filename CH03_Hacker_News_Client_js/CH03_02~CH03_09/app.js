@@ -9,9 +9,12 @@ const ul = document.createElement("ul");
 
 for (let i = 0; i < 10; i++) {
   const li = document.createElement("li");
+  const a = document.createElement("a");
 
-  li.innerHTML = newsFeed[i].title;
+  a.href = "#";
+  a.innerHTML = `${newsFeed[i].title} (${newsFeed[i].comments_count})`;
 
+  li.appendChild(a);
   ul.appendChild(li);
 }
 
