@@ -137,14 +137,20 @@ window.addEventListener("hashchange", function () {
   content.appendChild(title);
   console.log(newsContent);
 });
+/* DOM API 제거 */
 
 for (var i = 0; i < 10; i++) {
-  var li = document.createElement("li");
-  var a = document.createElement("a");
-  a.href = "#".concat(newsFeed[i].id);
-  a.innerHTML = "".concat(newsFeed[i].title, " (").concat(newsFeed[i].comments_count, ")");
-  li.appendChild(a);
-  ul.appendChild(li);
+  var div = document.createElement("div"); // const li = document.createElement("li");
+  // const a = document.createElement("a");
+
+  div.innerHTML = "\n    <li>\n      <a href=\"#".concat(newsFeed[i].id, "\">").concat(newsFeed[i].title, " (").concat(newsFeed[i].comments_count, ")</a>\n    </li>\n  "); // a.href = `#${newsFeed[i].id}`;
+  // a.innerHTML = `${newsFeed[i].title} (${newsFeed[i].comments_count})`;
+  // li.appendChild(a);
+
+  /* // DOM API 제거 */
+  // ul.appendChild(div.children[0]);
+
+  ul.appendChild(div.firstElementChild);
 }
 
 container.appendChild(ul);
