@@ -71,3 +71,5 @@ document.getElementById("root").appendChild(ul);
 2. DOM API 제거하기
 3. 중복 코드 제거하기
 ```
+
+- UI를 개선하는 리팩토링도 있겠지만, UI, 즉 최종적인 결과물은 변화가 거의 보이지 않지만 내부적인 개선도 굉장히 많이 일어날 수 있는 개선 활동도 있다.😄
