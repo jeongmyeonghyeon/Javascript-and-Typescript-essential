@@ -120,34 +120,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"app.ts":[function(require,module,exports) {
 "use strict";
 
-var __extends = this && this.__extends || function () {
-  var _extendStatics = function extendStatics(d, b) {
-    _extendStatics = Object.setPrototypeOf || {
-      __proto__: []
-    } instanceof Array && function (d, b) {
-      d.__proto__ = b;
-    } || function (d, b) {
-      for (var p in b) {
-        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
-      }
-    };
-
-    return _extendStatics(d, b);
-  };
-
-  return function (d, b) {
-    if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-
-    _extendStatics(d, b);
-
-    function __() {
-      this.constructor = d;
-    }
-
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-}();
-
 var container = document.getElementById("root");
 var ajax = new XMLHttpRequest();
 var content = document.createElement("div");
@@ -160,18 +132,28 @@ var store = {
   feeds: []
 };
 
+function applyApiMixins(targetClass, baseClasses) {
+  baseClasses.forEach(function (baseClass) {
+    Object.getOwnPropertyNames(baseClass.prototype).forEach(function (name) {
+      var descriptor = Object.getOwnPropertyDescriptor(baseClass.prototype, name);
+
+      if (descriptor) {
+        Object.defineProperty(targetClass.prototype, name, descriptor);
+      }
+    });
+  });
+}
+
 var Api =
 /** @class */
 function () {
-  function Api(url) {
-    this.url = url;
-    this.ajax = new XMLHttpRequest();
-  }
+  function Api() {}
 
-  Api.prototype.getRequest = function () {
-    this.ajax.open("GET", this.url, false);
-    this.ajax.send();
-    return JSON.parse(this.ajax.response);
+  Api.prototype.getRequest = function (url) {
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", url, false);
+    ajax.send();
+    return JSON.parse(ajax.response);
   };
 
   return Api;
@@ -179,35 +161,30 @@ function () {
 
 var NewsFeedApi =
 /** @class */
-function (_super) {
-  __extends(NewsFeedApi, _super);
-
-  function NewsFeedApi() {
-    return _super !== null && _super.apply(this, arguments) || this;
-  }
+function () {
+  function NewsFeedApi() {}
 
   NewsFeedApi.prototype.getData = function () {
-    return this.getRequest();
+    return this.getRequest(NEWS_URL);
   };
 
   return NewsFeedApi;
-}(Api);
+}();
 
 var NewsDetailApi =
 /** @class */
-function (_super) {
-  __extends(NewsDetailApi, _super);
+function () {
+  function NewsDetailApi() {}
 
-  function NewsDetailApi() {
-    return _super !== null && _super.apply(this, arguments) || this;
-  }
-
-  NewsDetailApi.prototype.getData = function () {
-    return this.getRequest();
+  NewsDetailApi.prototype.getData = function (id) {
+    return this.getRequest(CONTENT_URL.replace("@id", id));
   };
 
   return NewsDetailApi;
-}(Api);
+}();
+
+applyApiMixins(NewsFeedApi, [Api]);
+applyApiMixins(NewsDetailApi, [Api]);
 
 function getData(url) {
   ajax.open("GET", url, false);
