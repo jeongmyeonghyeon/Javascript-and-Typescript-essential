@@ -212,3 +212,14 @@ interface NewsComment extends News {
 ```
 
 ---
+
+##### 05. 상속과 믹스인
+
+```
+1. getData 클래스 변환
+2. 공통요소 뽑아내기
+3. 믹스인을 이용한 상속
+4. applyApiMixins
+```
+
+---
