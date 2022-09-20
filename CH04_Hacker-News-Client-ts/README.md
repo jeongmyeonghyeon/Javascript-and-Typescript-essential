@@ -222,4 +222,9 @@ interface NewsComment extends News {
 4. applyApiMixins
 ```
 
+코드를 작성하다보면 발생하는 중복코드.
+무한정 함수로만 묶어줄 수는 없는 일.
+상속을 활용.
+일단 클래스.
+
 ---
