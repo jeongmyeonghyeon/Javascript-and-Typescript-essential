@@ -12,10 +12,10 @@
 
 **기능구현**
 
-- 페이징
-- `hashchange` 이벤트를 활용한 라우터
+- 페이징.
+- `hashchange` 이벤트를 활용한 라우터.
 - 읽음 상태 표시.
-- `{{__marking__}}` 을 통한 템플릿 처리
+- `{{__marking__}}` 을 통한 템플릿 처리.
 
 API: [Hacker News API](https://github.com/HackerNews/API)
 
