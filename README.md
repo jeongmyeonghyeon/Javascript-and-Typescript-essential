@@ -17,4 +17,6 @@
 - 읽음 상태 표시.
 - `{{__marking__}}` 을 통한 템플릿 처리
 
+API: [Hacker News API](https://github.com/HackerNews/API)
+
 ---
