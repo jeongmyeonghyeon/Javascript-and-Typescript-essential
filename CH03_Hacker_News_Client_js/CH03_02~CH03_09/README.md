@@ -1,4 +1,4 @@
-##### Chapter 03. Hacker News Client
+##### Chapter 03. Hacker News Client - Javascript
 
 ---
 
