@@ -117,4 +117,98 @@ parcel로 실행하고 나니까 `node_modules` / `dist` / `.cache` / `package.j
 4. 풍성한 타입 설명
 ```
 
+- 타입 알리아스를 이용해서 지금까지는 타이핑을 해왔음.
+
+  - 타입스크립트가 제공하는 기능을 이용해서 타입을 기술하는 방법 → 보통 '타이핑'한다고 얘기.
+  - 뭔가 다른 방법도 있다는 뉘앙스...? → 👌🏻, 인터페이스.
+  - 이때 중요한 키워드가 '일관성'. → 타입 알리아스 파 VS 인터페이스 파 😅
+
+  ```typescript
+  type NewsFeed = News & {
+    comments_count: number;
+    points: number;
+    read?: boolean;
+  };
+  ```
+
+  ```typescript
+  interface NewsFeed extends News {
+    comments_count: number;
+    points: number;
+    read?: boolean;
+  }
+  ```
+
+  - 유니온 타입은 지원하지 않음. 이런 경우에는 쓰려면 타입 알리아스를 사용해야함. 그 외에는 인터페이스라고 하는 것을 주로 많이 쓰는 경향성이 좀 있음.
+
+(1) 타입 알리아스 (기존)
+
+```typescript
+type Store = {
+  currentPage: number;
+  offset: number;
+  limit: number;
+  feeds: NewsFeed[];
+};
+
+type News = {
+  id: number;
+  time_ago: string;
+  title: string;
+  url: string;
+  user: string;
+  content: string;
+};
+
+type NewsFeed = News & {
+  comments_count: number;
+  points: number;
+  read?: boolean;
+};
+
+type NewsDetail = News & {
+  comments: NewsComment[];
+};
+
+type NewsComment = News & {
+  comments: [];
+  level: number;
+};
+```
+
+(2) 인터페이스
+
+```typescript
+interface Store {
+  currentPage: number;
+  offset: number;
+  limit: number;
+  feeds: NewsFeed[];
+}
+
+interface News {
+  readonly id: number;
+  readonly time_ago: string;
+  readonly title: string;
+  readonly url: string;
+  readonly user: string;
+  readonly content: string;
+}
+
+interface NewsFeed extends News {
+  readonly comments_count: number;
+  readonly points: number;
+  read?: boolean;
+}
+
+interface NewsDetail extends News {
+  readonly comments: NewsComment[];
+}
+
+interface NewsComment extends News {
+  readonly comments: [];
+  readonly level: number;
+}
+```
+
 ---
