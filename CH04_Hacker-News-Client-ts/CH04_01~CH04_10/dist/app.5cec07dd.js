@@ -318,16 +318,29 @@ var Api = /*#__PURE__*/function () {
   function Api(url) {
     _classCallCheck(this, Api);
 
-    this.ajax = new XMLHttpRequest();
+    this.xhr = new XMLHttpRequest();
     this.url = url;
   }
 
   _createClass(Api, [{
-    key: "getRequest",
-    value: function getRequest() {
-      this.ajax.open("GET", this.url, false);
-      this.ajax.send();
-      return JSON.parse(this.ajax.response);
+    key: "getRequestWithXHR",
+    value: function getRequestWithXHR(cb) {
+      var _this = this;
+
+      this.xhr.open("GET", this.url);
+      this.xhr.addEventListener("load", function () {
+        cb(JSON.parse(_this.xhr.response));
+      });
+      this.xhr.send();
+    }
+  }, {
+    key: "getRequestWithPromise",
+    value: function getRequestWithPromise(cb) {
+      fetch(this.url).then(function (response) {
+        return response.json();
+      }).then(cb).catch(function () {
+        console.error("데이터를 불러오지 못했습니다.");
+      });
     }
   }]);
 
@@ -341,16 +354,21 @@ var NewsFeedApi = /*#__PURE__*/function (_Api) {
 
   var _super = _createSuper(NewsFeedApi);
 
-  function NewsFeedApi() {
+  function NewsFeedApi(url) {
     _classCallCheck(this, NewsFeedApi);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, url);
   }
 
   _createClass(NewsFeedApi, [{
-    key: "getData",
-    value: function getData() {
-      return this.getRequest();
+    key: "getDataWithXHR",
+    value: function getDataWithXHR(cb) {
+      return this.getRequestWithXHR(cb);
+    }
+  }, {
+    key: "getDataWithPromise",
+    value: function getDataWithPromise(cb) {
+      return this.getRequestWithPromise(cb);
     }
   }]);
 
@@ -364,16 +382,21 @@ var NewsDetailApi = /*#__PURE__*/function (_Api2) {
 
   var _super2 = _createSuper(NewsDetailApi);
 
-  function NewsDetailApi() {
+  function NewsDetailApi(url) {
     _classCallCheck(this, NewsDetailApi);
 
-    return _super2.apply(this, arguments);
+    return _super2.call(this, url);
   }
 
   _createClass(NewsDetailApi, [{
-    key: "getData",
-    value: function getData() {
-      return this.getRequest();
+    key: "getDataWithXHR",
+    value: function getDataWithXHR(cb) {
+      return this.getRequestWithXHR(cb);
+    }
+  }, {
+    key: "getDataWithPromise",
+    value: function getDataWithPromise(cb) {
+      return this.getRequestWithPromise(cb);
     }
   }]);
 
@@ -447,19 +470,23 @@ var NewsDetailView = /*#__PURE__*/function (_view_1$default) {
 
     _this.render = function (id) {
       var api = new api_1.NewsDetailApi(config_1.CONTENT_URL.replace("@id", id));
-      var newsContent = api.getData();
+      api.getDataWithPromise(function (data) {
+        var comments = data.comments,
+            title = data.title,
+            content = data.content;
 
-      _this.store.makeRead(Number(id));
+        _this.store.makeRead(Number(id));
 
-      _this.setTemplateData("comments", _this.makeComment(newsContent.comments));
+        _this.setTemplateData("comments", _this.makeComment(comments));
 
-      _this.setTemplateData("currentPage", String(_this.store.currentPage));
+        _this.setTemplateData("currentPage", String(_this.store.currentPage));
 
-      _this.setTemplateData("title", newsContent.title);
+        _this.setTemplateData("title", title);
 
-      _this.setTemplateData("content", newsContent.content);
+        _this.setTemplateData("content", content);
 
-      _this.updateView();
+        _this.updateView();
+      });
     };
 
     _this.store = store;
@@ -546,34 +573,44 @@ var NewsFeedView = /*#__PURE__*/function (_view_1$default) {
       _this.store.currentPage = Number(page);
       _this.store.limit = Math.ceil(_this.store.getAllFeedsLength() / _this.store.offset);
 
-      for (var i = (_this.store.currentPage - 1) * _this.store.offset; i < _this.store.currentPage * _this.store.offset; i++) {
-        var _this$store$getFeed = _this.store.getFeed(i),
-            id = _this$store$getFeed.id,
-            title = _this$store$getFeed.title,
-            comments_count = _this$store$getFeed.comments_count,
-            user = _this$store$getFeed.user,
-            points = _this$store$getFeed.points,
-            time_ago = _this$store$getFeed.time_ago,
-            read = _this$store$getFeed.read;
+      if (!_this.store.hasFeeds) {
+        _this.api.getDataWithPromise(function (feeds) {
+          _this.store.setFeeds(feeds);
 
-        _this.addHtml("\n      <div class=\"p-6 ".concat(read ? "bg-red-500" : "bg-white", " mt-6 rounded-lg shadow-md transition-colors duration-500 hover:bg-green-100\">\n        <div class=\"flex\">\n          <div class=\"flex-auto\">\n            <a href=\"#/show/").concat(id, "\">").concat(title, "</a>  \n          </div>\n          <div class=\"text-center text-sm\">\n            <div class=\"w-10 text-white bg-green-300 rounded-lg px-0 py-2\">").concat(comments_count, "</div>\n          </div>\n        </div>\n        <div class=\"flex mt-3\">\n          <div class=\"grid grid-cols-3 text-sm text-gray-500\">\n            <div><i class=\"fas fa-user mr-1\"></i>").concat(user, "</div>\n            <div><i class=\"fas fa-heart mr-1\"></i>").concat(points, "</div>\n            <div><i class=\"far fa-clock mr-1\"></i>").concat(time_ago, "</div>\n          </div>  \n        </div>\n      </div>    \n    "));
+          _this.renderView();
+        });
       }
 
-      _this.setTemplateData("news_feed", _this.getHtml());
+      _this.renderView();
+    };
 
-      _this.setTemplateData("prev_page", String(_this.store.prevPage));
+    _this.renderView = function () {
+      if (_this.store.hasFeeds) {
+        for (var i = (_this.store.currentPage - 1) * _this.store.offset; i < _this.store.currentPage * _this.store.offset; i++) {
+          var _this$store$getFeed = _this.store.getFeed(i),
+              id = _this$store$getFeed.id,
+              title = _this$store$getFeed.title,
+              comments_count = _this$store$getFeed.comments_count,
+              user = _this$store$getFeed.user,
+              points = _this$store$getFeed.points,
+              time_ago = _this$store$getFeed.time_ago,
+              read = _this$store$getFeed.read;
 
-      _this.setTemplateData("next_page", String(_this.store.nextPage));
+          _this.addHtml("\n        <div class=\"p-6 ".concat(read ? "bg-red-500" : "bg-white", " mt-6 rounded-lg shadow-md transition-colors duration-500 hover:bg-green-100\">\n          <div class=\"flex\">\n            <div class=\"flex-auto\">\n              <a href=\"#/show/").concat(id, "\">").concat(title, "</a>  \n            </div>\n            <div class=\"text-center text-sm\">\n              <div class=\"w-10 text-white bg-green-300 rounded-lg px-0 py-2\">").concat(comments_count, "</div>\n            </div>\n          </div>\n          <div class=\"flex mt-3\">\n            <div class=\"grid grid-cols-3 text-sm text-gray-500\">\n              <div><i class=\"fas fa-user mr-1\"></i>").concat(user, "</div>\n              <div><i class=\"fas fa-heart mr-1\"></i>").concat(points, "</div>\n              <div><i class=\"far fa-clock mr-1\"></i>").concat(time_ago, "</div>\n            </div>  \n          </div>\n        </div>    \n      "));
+        }
 
-      _this.updateView();
+        _this.setTemplateData("news_feed", _this.getHtml());
+
+        _this.setTemplateData("prev_page", String(_this.store.prevPage));
+
+        _this.setTemplateData("next_page", String(_this.store.nextPage));
+
+        _this.updateView();
+      }
     };
 
     _this.store = store;
     _this.api = new api_1.NewsFeedApi(config_1.NEWS_URL); // this.feeds = window.store.feeds;
-
-    if (!_this.store.hasFeeds) {
-      _this.store.setFeeds(_this.api.getData());
-    }
 
     return _this;
   }
@@ -776,7 +813,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61564" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56634" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
