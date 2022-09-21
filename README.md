@@ -2,6 +2,8 @@
 
 ---
 
+**같은 UI&기능, 전혀 다른 코드 구조**
+
 [CH03_Hacker_News_Client_JavaScript](https://jmnghn.github.io/Hacker-News-made-with-javascript)
 
 [CH04_Hacker_News_Client_TypeScript](https://jmnghn.github.io/Hacker-News-made-with-typescript)
