@@ -1,7 +1,7 @@
 import View from "../core/view";
 import { NewsFeedApi } from "../core/api";
 import { NEWS_URL } from "../config";
-import { NewsFeed } from "../types";
+import { NewsFeed, NewsStore } from "../types";
 
 const template: string = `
   <div class="bg-gray-600 min-h-screen">
@@ -30,31 +30,33 @@ const template: string = `
 
 export default class NewsFeedView extends View {
   private api: NewsFeedApi;
-  private feeds: NewsFeed[];
+  private store: NewsStore;
 
-  constructor(containerId: string) {
+  constructor(containerId: string, store: NewsStore) {
     super(containerId, template);
 
+    this.store = store;
     this.api = new NewsFeedApi(NEWS_URL);
-    this.feeds = window.store.feeds;
+    // this.feeds = window.store.feeds;
 
-    if (this.feeds.length === 0) {
-      this.feeds = window.store.feeds = this.api.getData();
-      this.makeFeeds();
+    if (!this.store.hasFeeds) {
+      this.store.setFeeds(this.api.getData());
     }
   }
 
-  render(): void {
-    window.store.currentPage = Number(location.hash.substring(7) || 1);
-    window.store.limit = Math.ceil(this.feeds.length / window.store.offset);
+  render = (page: string = "1"): void => {
+    this.store.currentPage = Number(page);
+    this.store.limit = Math.ceil(
+      this.store.getAllFeedsLength() / this.store.offset
+    );
 
     for (
-      let i = (window.store.currentPage - 1) * window.store.offset;
-      i < window.store.currentPage * window.store.offset;
+      let i = (this.store.currentPage - 1) * this.store.offset;
+      i < this.store.currentPage * this.store.offset;
       i++
     ) {
       const { id, title, comments_count, user, points, time_ago, read } =
-        this.feeds[i];
+        this.store.getFeed(i);
       this.addHtml(`
       <div class="p-6 ${
         read ? "bg-red-500" : "bg-white"
@@ -79,25 +81,9 @@ export default class NewsFeedView extends View {
     }
 
     this.setTemplateData("news_feed", this.getHtml());
-    this.setTemplateData(
-      "prev_page",
-      String(window.store.currentPage > 1 ? window.store.currentPage - 1 : 1)
-    );
-    this.setTemplateData(
-      "next_page",
-      String(
-        window.store.currentPage < window.store.limit
-          ? window.store.currentPage + 1
-          : window.store.limit
-      )
-    );
+    this.setTemplateData("prev_page", String(this.store.prevPage));
+    this.setTemplateData("next_page", String(this.store.nextPage));
 
     this.updateView();
-  }
-
-  private makeFeeds(): void {
-    for (let i = 0; i < this.feeds.length; i++) {
-      this.feeds[i].read = false;
-    }
-  }
+  };
 }
