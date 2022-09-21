@@ -2,7 +2,9 @@
 
 ---
 
-[CH03_Hacker_News_Client_js](https://jmnghn.github.io/Hacker-News-made-with-javascript)
+[CH03_Hacker_News_Client_JavaScript](https://jmnghn.github.io/Hacker-News-made-with-javascript)
+
+[CH04_Hacker_News_Client_TypeScript](https://jmnghn.github.io/Hacker-News-made-with-typescript)
 
 **사용 언어 및 도구**
 
