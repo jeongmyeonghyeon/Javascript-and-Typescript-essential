@@ -145,6 +145,12 @@ var Router =
 /** @class */
 function () {
   function Router() {
+    var _this = this;
+
+    this.go = function () {
+      _this.route();
+    };
+
     window.addEventListener("hashchange", this.route.bind(this));
     this.routeTable = [];
     this.defaultRoute = null;
@@ -604,7 +610,7 @@ var newsDetailView = new page_1.NewsDetailView("root");
 router.setDefaultPage(newsFeedView);
 router.addRoutePath("/page/", newsFeedView);
 router.addRoutePath("/show/", newsDetailView);
-router.route();
+router.go();
 },{"./core/router":"src/core/router.ts","./page":"src/page/index.ts"}],"../../../../../.nvm/versions/node/v16.15.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

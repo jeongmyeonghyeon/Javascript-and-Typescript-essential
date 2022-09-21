@@ -12,6 +12,10 @@ export default class Router {
     this.defaultRoute = null;
   }
 
+  go = (): void => {
+    this.route();
+  };
+
   setDefaultPage(page: View): void {
     this.defaultRoute = { path: "", page };
   }
@@ -20,7 +24,7 @@ export default class Router {
     this.routeTable.push({ path, page });
   }
 
-  route() {
+  private route() {
     const routePath = location.hash; // location.hash 에 '#'만 있을 경우, 빈 값('')을 반환함.
 
     if (routePath === "" && this.defaultRoute) {
