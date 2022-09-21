@@ -413,4 +413,6 @@ function newsDetail(): void {
 4. 접근 제어
 ```
 
+UI를 업데이트하는 코드를 개선.
+
 ---
