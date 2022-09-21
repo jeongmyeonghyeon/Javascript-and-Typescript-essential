@@ -2,7 +2,7 @@
 
 ---
 
-[CH03_Hacker_News_Client_js](https://jeongmyeonghyeon.github.io/Hacker-News-made-with-javascript)
+[CH03_Hacker_News_Client_js](https://jmnghn.github.io/Hacker-News-made-with-javascript)
 
 **사용 언어 및 도구**
 
