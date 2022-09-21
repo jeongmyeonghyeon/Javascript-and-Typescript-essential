@@ -334,7 +334,6 @@ function (_super) {
     _this = _super.call(this, containerId, template) || this;
     _this.api = new NewsFeedApi(NEWS_URL);
     _this.feeds = store.feeds;
-    store.limit = Math.ceil(_this.feeds.length / store.offset);
 
     if (_this.feeds.length === 0) {
       _this.feeds = store.feeds = _this.api.getData();

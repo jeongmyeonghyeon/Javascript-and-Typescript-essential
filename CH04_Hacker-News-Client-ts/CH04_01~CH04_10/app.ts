@@ -56,7 +56,7 @@ class Api {
     this.ajax.open("GET", this.url, false);
     this.ajax.send();
 
-    return JSON.parse(this.ajax.response) as AjaxResponse;
+    return JSON.parse(this.ajax.response);
   }
 }
 
@@ -185,7 +185,6 @@ class NewsFeedView extends View {
 
     this.api = new NewsFeedApi(NEWS_URL);
     this.feeds = store.feeds;
-    store.limit = Math.ceil(this.feeds.length / store.offset);
 
     if (this.feeds.length === 0) {
       this.feeds = store.feeds = this.api.getData();
