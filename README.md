@@ -11,6 +11,7 @@
 **사용 언어 및 도구**
 
 - vanilla js
+- typescript
 - 번들링: parceljs
 - 호스팅: gh-pages
 
