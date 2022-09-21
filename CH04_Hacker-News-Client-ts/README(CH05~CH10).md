@@ -240,4 +240,17 @@ UI를 업데이트하는 코드를 개선.
 2. 비동기 함수
 ```
 
+**tsconfig.json**
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "CommonJS",
+    "sourceMap": true,
+    "lib": ["es6", "dom"]
+  }
+}
+```
+
 ---
