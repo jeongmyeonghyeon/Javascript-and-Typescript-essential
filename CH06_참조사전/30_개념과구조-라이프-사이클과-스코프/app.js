@@ -1,4 +1,4 @@
-let myname = "jeong";
+let myname = "jeong"; // 전역 스코프 변수, 애플리케이션이 종료될 때까지 존재하는 변수.
 
 function foo() {
   let x = 10;
