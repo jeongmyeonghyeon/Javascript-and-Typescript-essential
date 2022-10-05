@@ -1,4 +1,4 @@
-#### 디버거 - 크롬 개발자 도구
+## 디버거 - 크롬 개발자 도구
 
 ---
 
@@ -7,8 +7,9 @@
 2. launch
 3. debugger
 ```
+<br />
 
-**task.json**
+### task.json
 
 ```json
 {
@@ -26,7 +27,7 @@
 
 <br />
 
-**launch.json**
+### launch.json
 
 ```json
 {
@@ -46,21 +47,21 @@
 
 <br />
 
-**VS Code 디버거 실행 과정**
+### VS Code 디버거 실행 과정
 
-(1) VS Code 좌측의 Run and Debug 탭
-(2) 상단 콤보 박스에 launch.json 안에 기술된 configuration을 읽어서 콤보 박스에 표시 (name 속성이 표시된다.)
-(3) preLaunchTask가 있으니까, task.json에 가서 pracel webapp을 실행하고 난 다음,
-(4) url로 접속해서 디버거에 붙인다.
-(5) type이 chrome이므로 크롬 브라우저를 자동으로 실행시킨다.
-(6) 실행 시키면, parcel이 작동하는게 콘솔에 보이고
-(7) alert에서 Debug Anyway라고 클릭하면 크롬 브라우저가 떠서 실제 앱이 실행 된 상태가 된다.
-(8) 디버거를 사용할 수 있는 준비 끝~
+(1) VS Code 좌측의 Run and Debug 탭<br />
+(2) 상단 콤보 박스에 launch.json 안에 기술된 configuration을 읽어서 콤보 박스에 표시 (name 속성이 표시된다.)<br />
+(3) preLaunchTask가 있으니까, task.json에 가서 pracel webapp을 실행하고 난 다음,<br />
+(4) url로 접속해서 디버거에 붙인다.<br />
+(5) type이 chrome이므로 크롬 브라우저를 자동으로 실행시킨다.<br />
+(6) 실행 시키면, parcel이 작동하는게 콘솔에 보이고<br />
+(7) alert에서 Debug Anyway라고 클릭하면 크롬 브라우저가 떠서 실제 앱이 실행 된 상태가 된다.<br />
+(8) 디버거를 사용할 수 있는 준비 끝~<br />
 (9) 크롬의 디버거와 연동되서 크롬 디버거에서 브레이크 포인트를 찍어도, VS Code에서도 확인할 수 있는 걸 볼 수 있다. (동기화)
 
 <br />
 
-**debugger**
+### debugger
 
 원하고 싶은 곳 브레이킹 포인트를 잡을 수 있는... :)
 
