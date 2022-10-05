@@ -1,4 +1,4 @@
-#### 배열 연산
+## 배열 연산
 
 ---
 
@@ -9,24 +9,30 @@
 4. reduce
 ```
 
+<br />
+
 **forEach**
 
-`for`, `for in`, `for of` 는 '문'을 이용한 반복이고,
+`for`, `for in`, `for of` 는 '문'을 이용한 반복이고, <br />
 `.forEach()`는 배열이 제공하는 함수를 통해서 '식'을 이용한 반복이다.
 
-자바스크립트의 '호출하는 인자의 개수와 받는 쪽의 인자의 개수가 아무런 상관이 없다.'는 특징...
+자바스크립트에는 `호출하는 인자의 개수와 받는 쪽의 인자의 개수가 아무런 상관이 없다.`는 특징이 있다. <br />
 forEach의 2번째(index), 3번째(원본 배열) 인자는 필요시에만 사용하면 된다.
 
 `return`이 없다.
 
 `forEach`와 '문'을 이용한 반복과의 차이를 살펴보자면, 우선 변수가 없다.
 
-대신 다량의 데이터가 됐을 때, for와 같은 전통적인 반복문이 훨씬 더 빠르다. (문법 사용의 선택 기준)
+대신 다량의 데이터가 됐을 때, for와 같은 전통적인 반복문이 훨씬 더 빠르다. (문법 사용의 선택 기준) <br />
 하지만 몇천건의 데이터에서는 유의미한 차이를 찾아보기 힘들기 때문에 편한것으로 사용해도 상관없다.
+
+<br />
 
 **map**
 
 배열 안의 데이터를 다른 데이터 형태로 변환하는 용도로 많이 사용한다.
+
+<br />
 
 **map&map (method chaining)**
 
@@ -55,11 +61,15 @@ const shakespeareTwoBooks: Book[] = books
   .map(makeAuthor("William Shakespeare"));
 ```
 
+<br />
+
 **filter**
+
+<br />
 
 **reduce(누적 함수)**
 
-사용 예 - 객체의 merge
+사용 예 - 객체의 merge.
 
 ```ts
 type SomeObject = {
@@ -80,13 +90,15 @@ const someObject: SomeObject = someObjects.reduce(
 console.log(someObjects); // {border: 'none', fontSize: 24, className: 'box sm-box'}
 ```
 
+<br />
+
 **유사 배열과 `Array.from`**
 
-배열과 같은 형태의 자료 구조이지만, 배열이 갖고 있는 도구(메소드). 즉, map, filter, reduce, forEach와 같은 류의 도구들은 갖고 있지 않은 그런 자료 구조.
+배열과 같은 형태의 자료 구조이지만, 배열이 갖고 있는 도구(메소드). <br />
+즉, map, filter, reduce, forEach와 같은 류의 도구들은 갖고 있지 않은 그런 자료 구조.
+예로, `arguments`가 있다.
 
-- arguments
-
-유사 배열을 배열처럼 순회하고 싶을 때
+유사 배열을 배열처럼 순회하고 싶다면...
 
 ```ts
 Array.from(arguments);
