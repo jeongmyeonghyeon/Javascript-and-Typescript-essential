@@ -1,4 +1,4 @@
-#### 형태의 변환 - 객체를 형태가 다른 객체로 변환하기
+## 형태의 변환 - 객체를 형태가 다른 객체로 변환하기
 
 ---
 
@@ -6,7 +6,7 @@
 1. source, target 변환
 ```
 
-### 😵‍💫
+#### 😵‍💫
 
 ```js
 const sourceObject = {
@@ -48,4 +48,4 @@ function makeGroup(source, info) {
 console.log(makeGroup(sourceObject, groupInfo));
 ```
 
-😵‍💫... 코드보다 기호가 많아... 연습!!!
+😵‍💫... 코드보다 기호가 많다...😅 연습!!!
