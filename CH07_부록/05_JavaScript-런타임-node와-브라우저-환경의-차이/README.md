@@ -1,4 +1,4 @@
-#### JavaScript 런타임 node와 브라우저 환경의 차이
+## JavaScript 런타임 node와 브라우저 환경의 차이
 
 ---
 
@@ -8,4 +8,5 @@
 3. 파일시스템
 ```
 
-프론트엔드에서 사용하는 도구들, Webpack 과 같은 도구에서 사용하는 node.js.
+프론트엔드에서 사용하는 도구들, Webpack 과 같은 도구에서 사용하는 node.js.<br />
+Frontend Enginner도 당연히 알아야 하는 영역이 된... :-)
