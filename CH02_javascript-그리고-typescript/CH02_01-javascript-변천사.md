@@ -1,6 +1,6 @@
-##### Chapter 02. javascript 그리고 typescript
+## Chapter 02. javascript 그리고 typescript
 
-##### 01. javascript 변천사
+### 01. javascript 변천사
 
 ```
 1. javascript 버전
