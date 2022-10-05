@@ -1,10 +1,9 @@
-#### 일급 함수
+## 일급 함수
 
-프로그래밍 언어에서 함수라고 하는 코드의 묶음을
-일반적인 값처럼 취급하는 개념을 뜻한다.
+프로그래밍 언어에서 함수라고 하는 코드의 묶음을 일반적인 값처럼 취급하는 개념을 뜻한다.
 
-그게 무슨 뜻이죠...? 😂
-→ 변수로 넣을 수 있다.
+(그게 무슨 뜻이죠...? 😂)
+→ '변수로 넣을 수 있다.'는 뜻 ^^;
 
 ---
 
@@ -13,6 +12,8 @@
 2. 반환 값으로 전달되는 함수
 3. 표현력의 차이
 ```
+
+<br />
 
 **반환 값으로 전달되는 함수**
 
@@ -24,8 +25,9 @@ function salePrice(discountRate, price) {
   return price - price * (discountRate * 0.01);
 }
 
-console.log("salePrice(10, 567000));
-console.log("salePrice(30, 567000));
+// (1)
+console.log(salePrice(10, 567000)); 
+console.log(salePrice(30, 567000));
 
 function discountPrice(discountRate) {
   return function (price) {
@@ -33,13 +35,15 @@ function discountPrice(discountRate) {
   };
 }
 
-console.log("discountPrice(30)(567000));
-console.log("discountPrice(10)(567000));
+// (2)
+console.log(discountPrice(30)(567000)); 
+console.log(discountPrice(10)(567000));
 
 let summerPrice = discountPrice(30);
 let winterPrice = discountPrice(10);
 
-console.log("summerPrice(567000));
-console.log("winterPrice(567000));
+// (3) ✅
+console.log(summerPrice(567000));
+console.log(winterPrice(567000));
 
 ```
