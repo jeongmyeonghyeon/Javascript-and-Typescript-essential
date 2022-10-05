@@ -1,13 +1,15 @@
-#### 형태의 변환 - 문자열을 객체로 변환하기
+## 형태의 변환 - 문자열을 객체로 변환하기
 
-'객체 → 문자열' 변환도 흔하지만,
-'문자열 → 객체' 변환도 아주 흔하다.
+'객체 → 문자열'의 변환도 흔하지만,<br />
+'문자열 → 객체'의 변환도 아주 흔하다.
 
 ---
 
 ```
 1. 객체 변환 클래스
 ```
+
+<br />
 
 ```js
 import MakeObject from "./make-object.js";
@@ -20,11 +22,9 @@ const movieData = `Title,Release,Ticketing Rate,Director
 const movieList = new MakeObject(movieData);
 
 console.log(movieList.toAllObject());
-```
 
-[결과 데이터]
-
-```js
+/*
+ * 결과 데이터
 [
   {
     "Ticketing Rate": "11.5% 브라이언 싱어",
@@ -44,9 +44,10 @@ console.log(movieList.toAllObject());
     Title: "동네사람들",
   },
 ];
+*/
 ```
 
-**MakeObject 클래스와 그 부모 클래스 HeaderListData**
+### MakeObject 클래스와 그 부모 클래스 HeaderListData
 
 ```js
 // make-object.js
