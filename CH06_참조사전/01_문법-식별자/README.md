@@ -1,6 +1,6 @@
-#### 식별자 (Identifier)
+## 식별자 (Identifier)
 
-**Reference**
+ref.
 
 [https://developer.mozilla.org/ko/docs/Glossary/Identifier](https://developer.mozilla.org/ko/docs/Glossary/Identifier)
 [https://developer.mozilla.org/ko/docs/Glossary/Unicode](https://developer.mozilla.org/ko/docs/Glossary/Unicode)
@@ -16,13 +16,13 @@
 
 - 식별자는 코드 내의 '변수', '함수', 혹은 '속성'을 식별하는 문자열이다.
 
-- Javascript의 식별자는 대소문자를 구별하며 유니코드 글자, `$`, `_`, 숫자(0-9)로 구성할 수 있지만, 숫자로 시작할 수는 없다.
+- JavaScript의 식별자는 대소문자를 구별하며 유니코드 글자, `$`, `_`, 숫자(0-9)로 구성할 수 있지만, 숫자로 시작할 수는 없다.
 
   - (+) 공백 문자.
   - (+) 길이에 대해,
-    - 특별히 길이를 제한을 두고 있진 않지만, 개발자가 쓰고 사용함에 있어 자연스럽게 길이가 제한이 되긴 하다. 통상적으로 Javascript, Typescript 개발자들이 변수명을 길게 짓는 것을 선호하지 않는 경향성이 있어 보인다. (짧막짧막하게)
+    - 특별히 길이를 제한을 두고 있진 않지만, 개발자가 쓰고 사용함에 있어 자연스럽게 길이가 제한이 되긴 한다. 통상적으로 JavaScript, Typescript 개발자들이 변수명을 길게 짓는 것을 선호하지 않는 경향성이 있어 보인다. (짧막짧막하게)
 
-- 식별자는 코드의 일부이지만 문자열은 데이터이기 때문에, 식별자와 문자열은 다르다. Javascript에서 식별자를 문자열로 변환하는 방법은 없지만, _어떤 경우 문자열을 분석해 식별자로 사용할 수 있다.(computed property)_
+- 식별자는 코드의 일부이지만, 문자열은 데이터이기 때문에 식별자와 문자열은 다르다. JavaScript에서 식별자를 문자열로 변환하는 방법은 없지만, _어떤 경우 문자열을 분석해 식별자로 사용할 수 있다.(computed property)_
 
   - 데이터로 만들어진 식별자
 
