@@ -14,6 +14,7 @@
 **JavaScript 의 Type과 TypeScript의 Type.**
 
 ```js
+// javascript
 function addAge(age) {
   return age + 1;
 }
@@ -40,6 +41,7 @@ function addAge(age) {
 - 오류가 런타임에서 발생한다.
 
 ```ts
+// typescript
 function addAge(age: number): number {
   return age + 1;
 }
